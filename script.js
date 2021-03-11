@@ -103,7 +103,6 @@ const createUser = (firstName, secondName, email) => {
 
  
   const createUserForm = id => {
-    //editCard.innerHTML = '';
     editCard.classList.remove('hide')
     let user = users.find(user => user.id === id)
    
@@ -151,7 +150,6 @@ const createUser = (firstName, secondName, email) => {
   }
 
 const options = e => {
-    // console.log(e.target);
     if (e.target.dataset) {
       if (e.target.dataset.btn === 'edit') {
         const id = e.target.closest('[data-id]').dataset.id;
@@ -172,11 +170,8 @@ const deleteUser = (id) => {
     //users.splice(users.findIndex(a => a.id === id) , 1)
    users = users.filter(user => user.id !== id);
     content.innerHTML =  createMarkup();
-       // return users
-        
 } 
 const createMarkup = () => {
-//const template = () => {
     return users.reduce((acc, user) => {
        acc+= `
        <li class='cards mb-2' data-id="${user.id}">
@@ -194,11 +189,7 @@ const createMarkup = () => {
         </li>
         `
     return acc
-    }, '' )//}
-    
-    
-        //content.innerHTML = template(users);
-        
+    }, '' )
 }
 
 
