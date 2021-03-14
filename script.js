@@ -143,7 +143,7 @@ const createUser = (firstName, secondName, email) => {
         validate(firstNameEdit);
         validate(lastNameEdit);
         validateEditedEmail(emailEdit);
-        if (validate(firstNameEdit) && validateEditedEmail (emailEdit) && validate(lastNameEdit))
+        if (validate(firstNameEdit) && validateEditedEmail(emailEdit) && validate(lastNameEdit))
        { 
         content.innerHTML =  createMarkup();
         editCard.classList.add('hide')
@@ -152,17 +152,17 @@ const createUser = (firstName, secondName, email) => {
   }
 
 const options = e => {
-      if (e.target.dataset.btn === 'edit') {
-        const id = e.target.closest('[data-id]').dataset.id;
-        createUserForm(id);
-      } 
-      else (e.target.dataset.btn === 'delete') 
-      {
-        const id = e.target.closest('[data-id]').dataset.id;
-        deleteUser(id);
-      } 
-    
-  };
+    if (e.target.dataset) {
+        if (e.target.dataset.btn === 'edit') {
+          const id = e.target.closest('[data-id]').dataset.id;
+          createUserForm(id);
+        } else if (e.target.dataset.btn === 'delete') {
+          console.log('delete');
+          const id = e.target.closest('[data-id]').dataset.id;
+          deleteUser(id);
+        } else return;
+      } else return;
+    };
 
 content.addEventListener('click', options)
 
