@@ -24,7 +24,7 @@ else {
 }
 const validateEmail = (input) => {
     const found = users.some(user => user.email === input.value);
-    const mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
+    const mailFormat = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
     if (input.value === '') {
         setError(input, 'Email can not be empty')
         return false;
@@ -34,7 +34,8 @@ const validateEmail = (input) => {
         console.log('Email already exist');
         return false;
     }
-    else if  (!mailFormat.test(input.value)) {
+    else if  (!mailFormat.test(input.value))
+     {
         setError(input, 'Invalid email')
         return false;
     }
@@ -46,17 +47,19 @@ const validateEmail = (input) => {
 
 
     const validateEditedEmail = (input) => {
-        const mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
+        //const mailFormat = /^([a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+)@([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:+)\.([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?))*$/
+        const mailFormat = /^[A-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\.[A-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[A-Z0-9-]+(?:\.[A-Z0-9-]+)*$/
         if (input.value === '') {
             setError(input, 'Email can not be empty')
             return false;
         }
         else if  (!mailFormat.test(input.value)) {
-            setError(input, 'Invalid email')
+            setError(input, 'Invalid email');
             return false;
         }
+       
         else {
-            setSuccess(input)
+            setSuccess(input);
             return true;
         }
         }
@@ -150,16 +153,16 @@ const createUser = (firstName, secondName, email) => {
   }
 
 const options = e => {
-    if (e.target.dataset) {
       if (e.target.dataset.btn === 'edit') {
         const id = e.target.closest('[data-id]').dataset.id;
         createUserForm(id);
-      } else if (e.target.dataset.btn === 'delete') {
-        console.log('delete');
+      } 
+      else (e.target.dataset.btn === 'delete') 
+      {
         const id = e.target.closest('[data-id]').dataset.id;
         deleteUser(id);
-      } else return;
-    } else return;
+      } 
+    
   };
 
 content.addEventListener('click', options)
@@ -167,7 +170,6 @@ content.addEventListener('click', options)
 
 
 const deleteUser = (id) => { 
-    //users.splice(users.findIndex(a => a.id === id) , 1)
    users = users.filter(user => user.id !== id);
     content.innerHTML =  createMarkup();
 } 
